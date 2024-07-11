@@ -2,9 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
+import cron from "node-cron";
 
 import userRoute from "./routes/user.route.js";
+import { updateWeatherData } from "./services/weatherService.js";
 
+//Database connection
 mongoose
   .connect(process.env.MONGO_DB)
   .then(() => {
@@ -23,6 +26,13 @@ app.listen(3000, () => {
 
 app.use("/api/user", userRoute);
 
+//Cron job to update weather data
+cron.schedule('1,2,4,5 * * * *', async () => {
+  console.log('Updating weather data...');
+  await updateWeatherData();
+});
+
+//Error handler
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "internal server error";

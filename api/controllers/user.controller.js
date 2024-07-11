@@ -36,3 +36,19 @@ export const updateUser = async (req, res, next) => {
         next(error);
     }
 }
+
+export const getWeatherData = async (req, res, next) => {
+    const { email, date } = req.query;
+    try {
+        const user = await User.findOne({ email });
+        if (!user){
+            return next(errorHandler(404, 'User not found!'));
+        }
+        const weatherData = user.weatherData.filter((data) => {
+            return new Date(data.date).toDateString() === new Date(date).toDateString();
+        });
+        res.status(200).json(weatherData);
+    } catch (error) {
+        next(error);
+    }
+}
