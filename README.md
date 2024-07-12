@@ -1,5 +1,5 @@
 # Weather Report App
-NodeJs backend application that providesweather reports to users by sending email according to their location. The app uses the OpenWeatherMap API to fetch current weather and use Gemini API to generate text about weather data. 
+NodeJs backend application that providesweather reports to users by sending email according to their location. The app uses the OpenWeatherMap API to fetch current weather and use Gemini API to generate text about weather data. This app deployed on Vercel.
 <br>
 
 ## Installation
@@ -9,7 +9,7 @@ To set up the project locally, follow these steps:
 **1. Clone the repository:**
 
 ```bash
-git clone https://github.com/kavindu-dilshan/KMP-Pharmacy.git
+git clone https://github.com/inupaUdara/NodeJS-Weather-Reports-App.git
 ```
 
 **2. Install dependencies for the frontend and backend:**
@@ -29,3 +29,26 @@ npm run dev
 ```
 
 <br>
+
+## Postman API collection
+
+**1. Create User:**
+
+```bash
+https://node-js-weather-reports-app.vercel.app/api/user/create-user
+```
+
+**2. Update User:**
+
+```bash
+https://node-js-weather-reports-app.vercel.app/api/user/update-user/668f6ce2a45ae57e5f13e27d
+```
+
+**3. Get weather data:**
+
+```bash
+https://node-js-weather-reports-app.vercel.app/api/user/weather-data?email=example2@gmail.com&date=2024-07-12
+```
+
+
+
