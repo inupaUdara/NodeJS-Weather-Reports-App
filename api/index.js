@@ -43,3 +43,12 @@ app.use((err, req, res, next) => {
       message,
    });
 });
+
+
+app.get('/api/check-env', (req, res) => {
+  res.json({
+    email: process.env.EMAIL,
+    weatherApiKey: process.env.WEATHER_API_KEY,
+    googleApiKey: process.env.GOOGLE_API_KEY,
+  });
+});
