@@ -12,7 +12,7 @@ To set up the project locally, follow these steps:
 git clone https://github.com/inupaUdara/NodeJS-Weather-Reports-App.git
 ```
 
-**2. Install dependencies for the frontend and backend:**
+**2. Install dependencies for backend:**
 
 ```bash
 npm install
