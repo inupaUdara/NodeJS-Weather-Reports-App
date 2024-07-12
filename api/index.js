@@ -28,7 +28,7 @@ app.listen(3000, () => {
 app.use("/api/user", userRoute);
 
 //Cron job to update weather data
-cron.schedule('53 * * * *', async () => {
+cron.schedule('17 * * * *', async () => {
   console.log('Updating weather data...');
   await updateWeatherData();
 });
@@ -45,10 +45,3 @@ app.use((err, req, res, next) => {
 });
 
 
-app.get('/api/check-env', (req, res) => {
-  res.json({
-    email: process.env.EMAIL,
-    weatherApiKey: process.env.WEATHER_API_KEY,
-    googleApiKey: process.env.GOOGLE_API_KEY,
-  });
-});
