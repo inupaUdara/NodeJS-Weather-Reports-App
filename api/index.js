@@ -28,7 +28,7 @@ app.listen(3000, () => {
 app.use("/api/user", userRoute);
 
 //Cron job to update weather data
-cron.schedule('9 * * * *', async () => {
+cron.schedule('38 * * * *', async () => {
   console.log('Updating weather data...');
   await updateWeatherData();
 });
