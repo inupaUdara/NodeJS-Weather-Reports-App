@@ -3,6 +3,8 @@ import User from "../models/user.model.js";
 import dotenv from 'dotenv';
 dotenv.config();
 
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
 import nodemailer from "nodemailer";
 
 const transpoter = nodemailer.createTransport({
@@ -12,6 +14,8 @@ const transpoter = nodemailer.createTransport({
     pass: process.env.PASSWORD,
   }
 })
+
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 const sendEmail = async (email, subject, text) => {
   const mailOptions = {
@@ -41,6 +45,21 @@ const getWeatherData = async (location) => {
   }
 };
 
+const generateWeatherText = async (weatherData) => {
+  try {
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+    const prompt = `Generate a detailed weather report for the following data: ${JSON.stringify(weatherData)}`;
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const text = response.text();
+    return text;
+      
+  } catch (error) {
+    console.error("Error generating weather text:", error);
+    return "Detailed weather report could not be generated.";
+  }
+};
+
 export const updateWeatherData = async () => {
   const users = await User.find({});
 
@@ -49,8 +68,9 @@ export const updateWeatherData = async () => {
     user.weatherData.push({ date: new Date(), data: weatherData });
     await user.save();
     const latestWeather = user.weatherData[user.weatherData.length - 1];
+    const weatherText = await generateWeatherText(latestWeather);
     console.log(latestWeather);
-    await sendEmail(user.email, "Weather Update", `The weather in ${user.location} is ${latestWeather}`)
+    await sendEmail(user.email, "Weather Update", `The weather in ${user.location} is ${weatherText}`)
 
   }
 };
