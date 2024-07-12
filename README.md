@@ -40,7 +40,7 @@ https://node-js-weather-reports-app.vercel.app/api/user/create-user
 API body - JSON
 ```bash
 {
-    "email":"inupaudara2022@gmail.com",
+    "email":"example@gmail.com",
     "location":"pannipitiya"
 }
 ```
@@ -49,6 +49,13 @@ API body - JSON
 
 ```bash
 https://node-js-weather-reports-app.vercel.app/api/user/update-user/668f6ce2a45ae57e5f13e27d
+```
+API body - JSON
+```bash
+{
+    "email":"example@gmail.com",
+    "location":"galle"
+}
 ```
 
 **3. Get weather data (GET):**
