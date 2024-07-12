@@ -7,6 +7,9 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 import nodemailer from "nodemailer";
 
+
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+
 const transpoter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -15,8 +18,6 @@ const transpoter = nodemailer.createTransport({
   }
 })
 
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-
 const sendEmail = async (email, subject, text) => {
   const mailOptions = {
     from: process.env.EMAIL,
@@ -24,7 +25,7 @@ const sendEmail = async (email, subject, text) => {
     subject: subject,
     text: text
   };
-
+  
   try {
     await transpoter.sendMail(mailOptions);
     console.log(`Email sent to ${email}`);
@@ -70,7 +71,7 @@ export const updateWeatherData = async () => {
     const latestWeather = user.weatherData[user.weatherData.length - 1];
     const weatherText = await generateWeatherText(latestWeather);
     console.log(latestWeather);
-    await sendEmail(user.email, "Weather Update", `The weather in ${user.location} is ${weatherText}`)
+    await sendEmail(user.email, "Weather Update", `${weatherText}`)
 
   }
 };
