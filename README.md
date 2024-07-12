@@ -1,5 +1,5 @@
 # Weather Report App
-NodeJs backend application that providesweather reports to users by sending email according to their location. The app uses the OpenWeatherMap API to fetch current weather and use Gemini API to generate text about weather data. This app deployed on Vercel.
+NodeJs backend application that provides weather reports to users by sending email according to their location. The app uses the OpenWeatherMap API to fetch current weather and use Gemini API to generate text about weather data. This app deployed on Vercel.
 <br>
 
 ## Installation
